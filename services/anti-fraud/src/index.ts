@@ -1,9 +1,6 @@
 import dotenv from "dotenv";
 import { evaluateTransaction } from "./service";
-import {
-  TOPIC_EVENT_CREATED,
-  TOPIC_EVENT_EVALUATED,
-} from "@my-org/common-tools";
+import { TOPIC_EVENT_CREATED, TOPIC_EVENT_EVALUATED } from "common-tools";
 import { KafkaNodeProducer } from "./kafka/kafka-node.producer";
 import { KafkaNodeConsumer } from "./kafka/kafka-node.consumer";
 

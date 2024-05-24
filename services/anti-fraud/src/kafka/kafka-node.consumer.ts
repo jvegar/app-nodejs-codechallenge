@@ -1,5 +1,5 @@
 import { Consumer, KafkaClient } from "kafka-node";
-import { IConsumer, sleep } from "@my-org/common-tools";
+import { IConsumer, sleep } from "common-tools";
 import pino, { Logger } from "pino";
 
 export class KafkaNodeConsumer implements IConsumer {

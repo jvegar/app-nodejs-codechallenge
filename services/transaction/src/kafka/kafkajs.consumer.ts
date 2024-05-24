@@ -6,8 +6,8 @@ import {
   Kafka,
   KafkaMessage,
 } from "kafkajs";
-import { IConsumer } from "@my-org/common-tools";
-import { sleep } from "@my-org/common-tools";
+import { IConsumer } from "common-tools";
+import { sleep } from "common-tools";
 
 export class KafkajsConsumer implements IConsumer {
   private readonly kafka: Kafka;

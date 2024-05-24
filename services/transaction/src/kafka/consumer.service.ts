@@ -1,5 +1,5 @@
 import { Injectable, OnApplicationShutdown } from "@nestjs/common";
-import { IConsumer } from "@my-org/common-tools";
+import { IConsumer } from "common-tools";
 import { KafkajsConsumer } from "./kafkajs.consumer";
 import { ConfigService } from "@nestjs/config";
 import { IKafkajsConsumerOptions } from "./kafkajs-consumer-options.interface";

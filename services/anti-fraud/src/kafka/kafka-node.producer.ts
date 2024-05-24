@@ -1,4 +1,4 @@
-import { IProducer } from "@my-org/common-tools";
+import { IProducer } from "common-tools";
 import { KafkaClient, Producer } from "kafka-node";
 import pino, { Logger } from "pino";
 

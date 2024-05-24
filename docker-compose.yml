@@ -24,7 +24,10 @@ services:
     ports:
       - 9092:9092
   transaction:
-    build: ./services/transaction
+    build:
+      context: ./services/transaction
+      additional_contexts:
+        - root=./
     depends_on: [kafka]
     environment:
       - APP_PORT=3000
@@ -36,7 +39,10 @@ services:
     ports:
       - 3000:3000
   anti-fraud:
-    build: ./services/anti-fraud
+    build:
+      context: ./services/anti-fraud
+      additional_contexts:
+        - root=./
     depends_on: [transaction]
     environment:
       - KAFKA_BROKER=kafka:29092
