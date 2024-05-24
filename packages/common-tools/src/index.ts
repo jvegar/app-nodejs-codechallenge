@@ -4,11 +4,10 @@ import {
   MAX_TRANSACTION_VALUE,
   TOPIC_EVENT_CREATED,
   TOPIC_EVENT_EVALUATED,
-} from "./constants/transaction.constant";
-import { IConsumer } from "./interfaces/consumer.interface";
-import { IProducer } from "./interfaces/producer.interface";
-import { TransactionStatus, TransactionType } from "./enums/transaciont.enum";
-import { sleep } from "./utils/sleep.utils";
+} from "./constants";
+import { IConsumer, IProducer } from "./interfaces";
+import { TransactionStatus, TransactionType } from "./enums";
+import { sleep } from "./utils";
 
 export {
   KAFKA_CLIENT_ID,

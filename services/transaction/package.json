@@ -1,7 +1,7 @@
 {
   "name": "transaction",
   "version": "1.0.0",
-  "description": "",
+  "description": "Exposes a GraphQL API for creating and modifying transactions. Use KafkaJS to produce events to `created-event` topic and consume evaluated events `evaluated-event` topic.",
   "main": "index.js",
   "scripts": {
     "start:dev": "nest start --watch"
@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@my-org/common-tools": "file:my-org-common-tools-1.0.0.tgz",
     "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.3.3",
     "@nestjs/config": "^3.2.0",
@@ -19,6 +18,7 @@
     "@nestjs/platform-express": "^10.3.3",
     "@nestjs/typeorm": "^10.0.2",
     "apollo-server-express": "^3.13.0",
+    "common-tools": "^1.0.0",
     "graphql": "^16.8.1",
     "graphql-tools": "^9.0.0",
     "kafkajs": "^2.2.4",

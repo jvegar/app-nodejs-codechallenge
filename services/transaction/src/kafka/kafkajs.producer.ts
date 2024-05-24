@@ -1,7 +1,7 @@
 import { Logger } from "@nestjs/common";
 import { Kafka, Message, Producer } from "kafkajs";
-import { IProducer } from "@my-org/common-tools";
-import { sleep } from "@my-org/common-tools";
+import { IProducer } from "common-tools";
+import { sleep } from "common-tools";
 
 export class KafkajsProducer implements IProducer {
   private readonly kafka: Kafka;

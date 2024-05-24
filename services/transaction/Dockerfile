@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:18.20.3-alpine
 
 ARG KAFKA_BROKER
 
@@ -6,7 +6,9 @@ RUN npm install -g @nestjs/cli
 
 WORKDIR /usr/src/app
 
-COPY ./my-org-common-tools-1.0.0.tgz .
+COPY --from=root package-lock.json ./
+
+COPY --from=root packages/common-tools packages/common-tools
 
 COPY package.json ./
 

@@ -2,7 +2,7 @@ import { Injectable, OnModuleInit } from "@nestjs/common";
 import { ConsumerService } from "../kafka/consumer.service";
 import { TransactionsService } from "./transactions.service";
 import { TransactionEvent } from "./entities/transaction-event.entity";
-import { TransactionStatus as EnumTransactionStatus } from "@my-org/common-tools";
+import { TransactionStatus as EnumTransactionStatus } from "common-tools";
 
 @Injectable()
 export class TransactionsConsumer implements OnModuleInit {

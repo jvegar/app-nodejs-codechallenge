@@ -1,4 +1,4 @@
-import { MAX_TRANSACTION_VALUE, TransactionStatus } from "@my-org/common-tools";
+import { MAX_TRANSACTION_VALUE, TransactionStatus } from "common-tools";
 
 export const evaluateTransaction = (value: number): number => {
   if (value > MAX_TRANSACTION_VALUE) {

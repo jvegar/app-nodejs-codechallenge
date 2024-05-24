@@ -1,5 +1,5 @@
 import { jest, describe, expect, it } from "@jest/globals";
-import { TransactionStatus } from "@my-org/common-tools";
+import { TransactionStatus } from "common-tools";
 import { evaluateTransaction } from "../../src/service";
 
 describe("Test evaluateTransaction function", () => {

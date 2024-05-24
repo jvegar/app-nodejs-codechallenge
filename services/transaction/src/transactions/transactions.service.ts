@@ -12,7 +12,7 @@ import { TransactionStatus } from "./entities/transaction-status.entity";
 import {
   TransactionStatus as EnumTransactionStatus,
   TransactionType as EnumTransactionType,
-} from "@my-org/common-tools";
+} from "common-tools";
 
 @Injectable()
 export class TransactionsService {

@@ -1,7 +1,7 @@
 import { Injectable, OnApplicationShutdown } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Message } from "kafkajs";
-import { IProducer } from "@my-org/common-tools";
+import { IProducer } from "common-tools";
 import { KafkajsProducer } from "./kafkajs.producer";
 
 @Injectable()

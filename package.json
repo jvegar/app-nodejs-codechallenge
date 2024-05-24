@@ -1,0 +1,17 @@
+{
+  "name": "app-nodejs-codechallenge",
+  "version": "1.0.0",
+  "description": "Our code challenge will let you marvel us with your Jedi coding skills :smile:.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "services/anti-fraud",
+    "packages/common-tools",
+    "services/transaction"
+  ]
+}
