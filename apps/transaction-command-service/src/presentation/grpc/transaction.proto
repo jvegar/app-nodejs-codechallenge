@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package transaction;
+
+service TransactionService {
+    rpc CreateTransaction(CreateRequest) returns (CreateResponse);
+}
+
+message CreateRequest {
+    string accountExternalIdDebit = 1;
+    string accountExternalIdCredit = 2;
+    int32 transferTypeId = 3;
+    double value = 4;
+}
+
+message CreateResponse {
+    string transactionId = 1;
+}

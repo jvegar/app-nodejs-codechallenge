@@ -1,0 +1,28 @@
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { TransactionModule } from './transaction.module';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { ReflectionService } from '@grpc/reflection';
+import { join } from 'path';
+
+async function bootstrap() {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    TransactionModule,
+    {
+      transport: Transport.GRPC,
+      options: {
+        onLoadPackageDefinition: (pkg, server) => {
+          new ReflectionService(pkg).addToServer(server);
+        },
+        package: 'transaction',
+        protoPath: join(__dirname, 'presentation/grpc/transaction.proto'),
+        url: 'localhost:5000',
+      },
+    }
+  );
+
+  await app.listen();
+  Logger.log(`Transaction Command microservice is listening`);
+}
+
+bootstrap();
