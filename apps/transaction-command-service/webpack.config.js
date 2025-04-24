@@ -13,7 +13,7 @@ module.exports = {
       tsConfig: './tsconfig.app.json',
       assets: [
         './src/assets',
-        'apps/transaction-command-service/src/presentation/grpc/transaction.proto',
+        'apps/transaction-command-service/src/presentation/grpc/proto/transaction.proto',
       ],
       optimization: false,
       outputHashing: 'none',

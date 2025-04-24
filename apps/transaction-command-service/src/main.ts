@@ -15,7 +15,7 @@ async function bootstrap() {
           new ReflectionService(pkg).addToServer(server);
         },
         package: 'transaction',
-        protoPath: join(__dirname, 'presentation/grpc/transaction.proto'),
+        protoPath: join(__dirname, 'presentation/grpc/proto/transaction.proto'),
         url: 'localhost:5000',
       },
     }
