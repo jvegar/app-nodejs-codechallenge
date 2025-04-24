@@ -1,4 +1,12 @@
 {
+  "scripts": {
+    "start:docker": "docker-compose up -d",
+    "start:transaction-command-service": "nx serve transaction-command-service",
+    "start:transaction-query-service": "nx serve transaction-query-service",
+    "start:anti-fraud-service": "nx serve anti-fraud-service",
+    "start:graphql-gateway": "nx serve graphql-gateway",
+    "start:all": "concurrently \"npm run start:docker\" \"npm run start:transaction-command-service\" \"npm run start:transaction-query-service\" \"npm run start:anti-fraud-service\" \"npm run start:graphql-gateway\""
+  },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@nestjs/schematics": "^10.0.1",
