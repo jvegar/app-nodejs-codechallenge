@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateTransactionCommand } from '../create-transaction.command';
 import { MongoEventStoreService } from '../../../infraestructure/event-store/mongo-event-store.service';
-import { TransactionCreatedEvent } from '../../../domain/events/transacion-created.event';
+import { TransactionCreatedEvent } from '../../../domain/events/transaction-created.event';
 import { v4 as uuidv4 } from 'uuid';
 
 @CommandHandler(CreateTransactionCommand)

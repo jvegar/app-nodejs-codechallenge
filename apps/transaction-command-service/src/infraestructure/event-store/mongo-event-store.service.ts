@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventStorePort } from '../../domain/ports/event-store.port';
 import { MongoClient, Collection } from 'mongodb';
-import { TransactionCreatedEvent } from '../../domain/events/transacion-created.event';
+import { TransactionCreatedEvent } from '../../domain/events/transaction-created.event';
 
 @Injectable()
 export class MongoEventStoreService implements EventStorePort {
@@ -9,9 +9,9 @@ export class MongoEventStoreService implements EventStorePort {
   private collection: Collection;
 
   constructor() {
-    this.client = new MongoClient(
-      process.env.MONGO_URI || 'mongodb://localhost:27017'
-    );
+    const mongoUri =
+      process.env.MONGO_URI || 'mongodb://root:example@localhost:27017';
+    this.client = new MongoClient(mongoUri);
     this.client.connect().then(() => {
       this.collection = this.client.db('transaction').collection('events');
     });
