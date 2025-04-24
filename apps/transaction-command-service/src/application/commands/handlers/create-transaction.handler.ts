@@ -3,6 +3,7 @@ import { CreateTransactionCommand } from '../create-transaction.command';
 import { MongoEventStoreService } from '../../../infraestructure/event-store/mongo-event-store.service';
 import { TransactionCreatedEvent } from '../../../domain/events/transaction-created.event';
 import { v4 as uuidv4 } from 'uuid';
+import { EventTypeEnum } from '../../enums/event-type.enum';
 
 @CommandHandler(CreateTransactionCommand)
 export class CreateTransactionHandler
@@ -33,7 +34,12 @@ export class CreateTransactionHandler
     );
 
     // Save the event to the event store
-    await this.eventStore.saveEvent(event);
+    await this.eventStore.saveEvent({
+      aggregateId: transactionId,
+      eventData: event,
+      eventType: EventTypeEnum.TRANSACTION_CREATED,
+      timestamp: new Date().toISOString(),
+    });
 
     return { transactionId };
   }

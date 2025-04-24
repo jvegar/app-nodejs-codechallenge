@@ -1,5 +1,5 @@
-import { TransactionCreatedEvent } from '../events/transaction-created.event';
+import { EventDto } from '../../application/dtos/event.dto';
 
 export interface EventStorePort {
-  saveEvent(event: TransactionCreatedEvent): Promise<void>;
+  saveEvent(event: EventDto): Promise<void>;
 }

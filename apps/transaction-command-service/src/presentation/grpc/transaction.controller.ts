@@ -2,7 +2,7 @@ import { Controller, Logger, Inject } from '@nestjs/common';
 import { GrpcMethod, RpcException } from '@nestjs/microservices';
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateTransactionCommand } from '../../application/commands/create-transaction.command';
-import { CreateTransactionDto } from '../../application/dtos/create-transaction.dto';
+import { CreateRequest, CreateResponse } from './proto/transaction';
 import { ClientKafka } from '@nestjs/microservices';
 
 @Controller()
@@ -15,9 +15,7 @@ export class TransactionController {
   ) {}
 
   @GrpcMethod('TransactionService', 'CreateTransaction')
-  async createTransaction(
-    data: CreateTransactionDto
-  ): Promise<{ transactionId: string }> {
+  async createTransaction(data: CreateRequest): Promise<CreateResponse> {
     try {
       const {
         accountExternalIdDebit,

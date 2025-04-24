@@ -4,10 +4,17 @@ import { MongoEventStoreService } from './infraestructure/event-store/mongo-even
 import { TransactionController } from './presentation/grpc/transaction.controller';
 import { CreateTransactionHandler } from './application/commands/handlers/create-transaction.handler';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { MongooseModule } from '@nestjs/mongoose';
+import { EventSchema } from './domain/schemas/event.schema';
 
 @Module({
   imports: [
     CqrsModule,
+    MongooseModule.forRoot(
+      process.env.MONGO_URI ||
+        'mongodb://root:example@localhost:27017/transaction?authSource=admin'
+    ),
+    MongooseModule.forFeature([{ name: 'Event', schema: EventSchema }]),
     ClientsModule.register([
       {
         name: 'KAFKA_SERVICE',
