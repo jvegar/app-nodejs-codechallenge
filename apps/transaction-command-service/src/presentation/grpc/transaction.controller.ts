@@ -46,7 +46,11 @@ export class TransactionController {
         timestamp: Date.now(),
       };
 
-      this.kafkaClient.emit('transaction-created', eventPayload);
+      this.kafkaClient.emit('transaction-created', {
+        key: transactionId,
+        value: JSON.stringify(eventPayload),
+      });
+
       this.logger.log(
         `Transaction-created event emitted: ${JSON.stringify({
           ...eventPayload,
