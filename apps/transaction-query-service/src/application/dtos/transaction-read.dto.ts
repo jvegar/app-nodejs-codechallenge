@@ -1,5 +1,5 @@
 export class TransactionReadDto {
-  transacionExternalId: string;
+  transactionExternalId: string;
   accountExternalIdDebit: string;
   accountExternalIdCredit: string;
   transactionTypeId: number;
@@ -10,7 +10,7 @@ export class TransactionReadDto {
   createdAt: Date;
 
   constructor(
-    transacionExternalId: string,
+    transactionExternalId: string,
     accountExternalIdDebit: string,
     accountExternalIdCredit: string,
     tramsactionTypeId: number,
@@ -20,7 +20,7 @@ export class TransactionReadDto {
     value: number,
     createdAt: Date
   ) {
-    this.transacionExternalId = transacionExternalId;
+    this.transactionExternalId = transactionExternalId;
     this.accountExternalIdDebit = accountExternalIdDebit;
     this.accountExternalIdCredit = accountExternalIdCredit;
     this.transactionTypeId = tramsactionTypeId;
