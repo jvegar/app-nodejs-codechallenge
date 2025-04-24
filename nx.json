@@ -25,7 +25,10 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/transaction-command-service-e2e/**/*"]
+      "exclude": [
+        "apps/transaction-command-service-e2e/**/*",
+        "apps/transaction-query-service-e2e/**/*"
+      ]
     }
   ]
 }

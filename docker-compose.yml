@@ -8,6 +8,17 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  cockroachdb:
+    image: cockroachdb/cockroach:v22.2.0
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    command: start-single-node --insecure
+    volumes:
+      - cockroach_data:/cockroach/cockroach-data
+    environment:
+      - COCKROACH_DATABASE=transaction
+
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
     environment:
@@ -34,3 +45,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+
+volumes:
+  cockroach_data:
