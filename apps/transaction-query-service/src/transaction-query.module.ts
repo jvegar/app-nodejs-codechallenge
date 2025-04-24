@@ -34,10 +34,9 @@ import { transactionRoutes } from './presentation/rest/transaction.routes';
       },
     ]),
   ],
-  controllers: [TransactionController],
+  controllers: [TransactionController, KafkaConsumerService],
   providers: [
     TransactionReadRepository,
-    KafkaConsumerService,
     {
       provide: 'TRANSACTION_READ_REPOSITORY',
       useExisting: TransactionReadRepository,
