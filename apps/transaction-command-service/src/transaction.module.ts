@@ -14,11 +14,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.KAFKA,
         options: {
           client: {
-            clientId: 'transaction-command',
-            brokers: ['localhost:9092'], // Update with your Kafka broker address
+            clientId: process.env.KAFKA_CLIENT_ID || 'transaction-command',
+            brokers: [process.env.KAFKA_BROKER || 'localhost:9092'],
           },
           consumer: {
-            groupId: 'transaction-command-consumer',
+            groupId:
+              process.env.KAFKA_GROUP_ID || 'transaction-command-consumer',
           },
         },
       },
