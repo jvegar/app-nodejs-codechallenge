@@ -10,6 +10,11 @@ import { TransactionReadRepository } from './infrastructure/persistence/transact
 import { KafkaConsumerService } from './infrastructure/messaging/kafka.consumer.service';
 import { TransactionController } from './presentation/rest/transaction.controller';
 import { transactionRoutes } from './presentation/rest/transaction.routes';
+import { GetTransactionHandler } from './application/queries/handlers/get-transaction.handler';
+import { ListTransactionsHandler } from './application/queries/handlers/list-transactions.handler';
+
+// Query handlers
+const QueryHandlers = [GetTransactionHandler, ListTransactionsHandler];
 
 @Module({
   imports: [
@@ -37,6 +42,7 @@ import { transactionRoutes } from './presentation/rest/transaction.routes';
   controllers: [TransactionController, KafkaConsumerService],
   providers: [
     TransactionReadRepository,
+    ...QueryHandlers,
     {
       provide: 'TRANSACTION_READ_REPOSITORY',
       useExisting: TransactionReadRepository,

@@ -1,4 +1,5 @@
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
+import { Inject } from '@nestjs/common';
 import { GetTransactionQuery } from '../get-transaction.query';
 import { TransactionReadRepositoryPort } from '../../../domain/ports/transaction-read.repository.port';
 import { TransactionReadDto } from '../../../application/dtos/transaction-read.dto';
@@ -8,6 +9,7 @@ export class GetTransactionHandler
   implements IQueryHandler<GetTransactionQuery>
 {
   constructor(
+    @Inject('TRANSACTION_READ_REPOSITORY')
     private readonly transactionReadRepository: TransactionReadRepositoryPort
   ) {}
 

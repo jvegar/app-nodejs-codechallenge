@@ -28,6 +28,20 @@ export class TransactionReadRepository
     } as any); // Cast to any to bypass TypeORM type checking
   }
 
+  async updateStatus(
+    transactionId: string,
+    transactionStatusId: number,
+    transactionStatusName: string
+  ): Promise<void> {
+    await this.transactionReadRepository.update(
+      { transactionExternalId: transactionId },
+      {
+        transactionStatusId,
+        transactionStatusName,
+      }
+    );
+  }
+
   async findById(transactionExternalId: string): Promise<TransactionReadModel> {
     const transaction = await this.transactionReadRepository.findOne({
       where: { transactionExternalId },

@@ -12,13 +12,13 @@ export class TransactionReadEntity {
   accountExternalIdCredit: string;
 
   @Column({ name: 'transaction_type_id' })
-  transactionTypeId: string;
+  transactionTypeId: number;
 
   @Column({ name: 'transaction_type_name' })
   transactionTypeName: string;
 
   @Column({ name: 'transaction_status_id' })
-  transactionStatusId: string;
+  transactionStatusId: number;
 
   @Column({ name: 'transaction_status_name' })
   transactionStatusName: string;
