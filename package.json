@@ -9,7 +9,11 @@
     "test:anti-fraud": "nx test anti-fraud-service",
     "test:anti-fraud:unit": "nx test anti-fraud-service --testMatch='**/test/unit/**/*.spec.ts'",
     "test:anti-fraud:integration": "nx test anti-fraud-service --testMatch='**/test/integration/**/*.spec.ts'",
-    "test:anti-fraud:coverage": "nx test anti-fraud-service --coverage"
+    "test:anti-fraud:coverage": "nx test anti-fraud-service --coverage",
+    "test:transaction-command": "nx test transaction-command-service",
+    "test:transaction-command:unit": "nx test transaction-command-service --testMatch='**/test/unit/**/*.spec.ts'",
+    "test:transaction-command:integration": "nx test transaction-command-service --testMatch='**/test/integration/**/*.spec.ts'",
+    "test:transaction-command:coverage": "nx test transaction-command-service --coverage"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
@@ -49,6 +53,7 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/cqrs": "^11.0.3",
     "@nestjs/microservices": "^10.4.17",
+    "@nestjs/mongoose": "^11.0.3",
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/typeorm": "^11.0.0",
     "axios": "^1.6.0",
@@ -56,6 +61,7 @@
     "class-validator": "^0.14.1",
     "kafkajs": "^2.2.4",
     "mongodb": "^6.16.0",
+    "mongoose": "^8.13.2",
     "pg": "^8.15.5",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
