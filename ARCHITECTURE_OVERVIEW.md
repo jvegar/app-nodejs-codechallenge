@@ -42,13 +42,13 @@ This document outlines the architecture of the transaction management system, wh
 
 ```mermaid
 flowchart LR
-    TransactionCommandService -- Create Transaction -->|gRPC| TransactionCreatedEvent
+    TransactionCommandService -- Create Transaction --> TransactionCreatedEvent
     TransactionCommandService -- Emit Event --> Kafka
     Kafka -- Transaction Created Event --> TransactionQueryService
     Kafka -- Transaction Created Event --> AntiFraudService
     AntiFraudService -- Emit Fraud Check Result --> Kafka
     Kafka -- Fraud Check Result --> TransactionQueryService
-    TransactionQueryService -- Query Transactions --> REST API
+    TransactionQueryService -- Query Transactions --> REST_API
     GraphQLGateway -- Query Transactions --> TransactionQueryService
     GraphQLGateway -- Create Transaction --> TransactionCommandService
 ```
