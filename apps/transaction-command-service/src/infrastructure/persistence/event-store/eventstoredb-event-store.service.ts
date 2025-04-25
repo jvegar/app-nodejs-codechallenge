@@ -11,7 +11,7 @@ export class EventStoreDBEventStoreService implements EventStorePort {
     ) {}
     async saveEvent(event: EventDto): Promise<void> {
         try {
-            await this.eventStoreDB.appendToStream(event.aggregateId, jsonEvent({type: EventTypeEnum[EventTypeEnum.TRANSACTION_CREATED], data: {...event} }));
+            await this.eventStoreDB.appendToStream("transactions", jsonEvent({type: EventTypeEnum[EventTypeEnum.TRANSACTION_CREATED], data: {...event} }));
         } catch (error) {
             console.error('Error saving event:', error);
         }
