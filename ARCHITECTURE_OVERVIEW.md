@@ -8,12 +8,17 @@ This document outlines the architecture of the transaction management system, wh
 
 - **Path**: `apps/transaction-command-service`
 - **Description**: This microservice is responsible for managing command operations related to transactions. It provides a gRPC interface for creating transaction events.
-- **Data Storage**: Events are stored in MongoDB.
+- **Data Storage**: Events are stored in EventStoreDB stream.
 - **Communication**:
-  - Emits events to the `transaction-created` topic in Kafka after creating a transaction.
   - Listens for commands to create transactions and processes them accordingly.
 
-### 2. Transaction Query Service
+### 2. Transaction Worker Service
+- **Path**: `apps/transaction-worker-service`
+- **Description**: This microservice is responsible for listening to EventStoreDB events  and publishing them to Kafka.
+- **Communication**:
+  - Consumes events from EventStoreDB transaction persistent subscription and publishes them to Kafka `transaction-created` topic.
+
+### 3. Transaction Query Service
 
 - **Path**: `apps/transaction-query-service`
 - **Description**: This microservice handles query operations for transactions. It provides a REST API for querying a denormalized transaction table.
@@ -22,7 +27,7 @@ This document outlines the architecture of the transaction management system, wh
   - Consumes events from the `transaction-created` topic to populate the denormalized transaction table.
   - Consumes events from the `fraud-check-result` topic to update the status of transactions.
 
-### 3. Anti-Fraud Service
+### 4. Anti-Fraud Service
 
 - **Path**: `apps/anti-fraud-service`
 - **Description**: This event-driven microservice is responsible for validating transactions for potential fraud. It consumes transaction events and emits the results of the validation.
@@ -30,7 +35,7 @@ This document outlines the architecture of the transaction management system, wh
   - Consumes events from the `transaction-created` topic to validate transactions.
   - Emits results to the `fraud-check-result` topic, indicating whether a transaction is approved or rejected.
 
-### 4. GraphQL Gateway
+### 5. GraphQL Gateway
 
 - **Path**: `apps/graphql-gateway`
 - **Description**: This gateway provides a unified GraphQL API that integrates both command and query operations.
@@ -42,8 +47,9 @@ This document outlines the architecture of the transaction management system, wh
 
 ```mermaid
 flowchart LR
-    TransactionCommandService -- Create Transaction --> TransactionCreatedEvent
-    TransactionCommandService -- Emit Event --> Kafka
+    TransactionCommandService -- Create Transaction --> EventStoreDB
+    EventStoreDB -- Persistent Subscription --> TransactionWorkerService    
+    TransactionWorkerService -- Transaction Created Event --> Kafka
     Kafka -- Transaction Created Event --> TransactionQueryService
     Kafka -- Transaction Created Event --> AntiFraudService
     AntiFraudService -- Emit Fraud Check Result --> Kafka
