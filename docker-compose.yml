@@ -73,6 +73,12 @@ services:
       - type: volume
         source: eventstore-volume-logs
         target: /c/data/eventstore/logs
+
+  redis:
+    image: redis:6.2.5
+    ports:
+      - "6379:6379"
+      
 volumes:
   cockroach_data:
   eventstore-volume-data:
