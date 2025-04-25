@@ -103,7 +103,7 @@ npm run start:all
 1. Open http://localhost:4000/graphql
 
 2. To create a transaction
-## Operation
+### Operation
 ```graphql
 mutation CreateTransaction($input: CreateTransactionInput!) {
   createTransaction(input: $input) {
@@ -111,7 +111,7 @@ mutation CreateTransaction($input: CreateTransactionInput!) {
   }
 }
 ```
-## Variables
+### Variables
 ```json
 {
   "input": {
@@ -123,7 +123,7 @@ mutation CreateTransaction($input: CreateTransactionInput!) {
 }
 ```
 3. To get a transaction
-## Operation
+### Operation
 ```graphql
 query GetTransaction($transactionExternalId: String!) {
   getTransaction(transactionExternalId: $transactionExternalId) {
@@ -139,9 +139,26 @@ query GetTransaction($transactionExternalId: String!) {
   }
 }
 ```
-## Variables
+### Variables
 ```json
 {
   "transactionExternalId": "123456"
 }
 ```
+4. To get all transactions
+### Operation
+```graphql    
+query GetTransactions {
+  getTransactions {
+    transactionExternalId
+    transactionType {
+      name
+    }
+    transactionStatus {
+      name
+    }
+    value
+    createdAt
+  }
+}
+``` 
