@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { MongooseModule } from '@nestjs/mongoose';
+import { EventStoreDBClient } from '@eventstore/db-client';
+import { EventSchema } from './domain/schemas/event.schema';
+import { EventStoreDBEventStoreService } from './infrastructure/persistence/event-store/eventstoredb-event-store.service';
 import { MongoEventStoreService } from './infrastructure/persistence/event-store/mongo-event-store.service';
 import { TransactionController } from './presentation/grpc/transaction.controller';
 import { CreateTransactionHandler } from './application/commands/handlers/create-transaction.handler';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { MongooseModule } from '@nestjs/mongoose';
-import { EventSchema } from './domain/schemas/event.schema';
 
 @Module({
   imports: [
@@ -25,14 +27,23 @@ import { EventSchema } from './domain/schemas/event.schema';
             brokers: [process.env.KAFKA_BROKER || 'localhost:9092'],
           },
           consumer: {
-            groupId:
-              process.env.KAFKA_GROUP_ID || 'transaction-command-consumer',
+            groupId: process.env.KAFKA_GROUP_ID || 'transaction-command-consumer',
           },
         },
       },
     ]),
   ],
   controllers: [TransactionController],
-  providers: [MongoEventStoreService, CreateTransactionHandler],
+  providers: [
+    MongoEventStoreService,
+    EventStoreDBEventStoreService,
+    CreateTransactionHandler,
+    {
+      provide: EventStoreDBClient,
+      useFactory: () => {
+        return EventStoreDBClient.connectionString`esdb://localhost:2113?tls=false`;
+      }
+    }
+  ],
 })
 export class TransactionModule {}

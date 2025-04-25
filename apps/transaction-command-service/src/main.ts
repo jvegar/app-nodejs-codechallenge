@@ -4,6 +4,7 @@ import { TransactionModule } from './transaction.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ReflectionService } from '@grpc/reflection';
 import { join } from 'path';
+import { connect as connectToEventStore } from './infrastructure/persistence/event-store/eventstoredb.client';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -21,7 +22,7 @@ async function bootstrap() {
     }
   );
   app.useGlobalPipes(new ValidationPipe());
-
+  await connectToEventStore();
   await app.listen();
   Logger.log(`Transaction Command microservice is listening`);
 }

@@ -20,7 +20,6 @@ export class TransactionController {
 
   constructor(
     private readonly commandBus: CommandBus,
-    @Inject('KAFKA_SERVICE') private readonly kafkaClient: ClientKafka
   ) {}
 
   @GrpcMethod('TransactionService', 'CreateTransaction')
@@ -43,28 +42,6 @@ export class TransactionController {
           transferTypeId,
           value
         )
-      );
-
-      // Emit the transaction-created event to Kafka
-      const eventPayload = {
-        transactionId,
-        accountExternalIdDebit,
-        accountExternalIdCredit,
-        transferTypeId,
-        value,
-        timestamp: Date.now(),
-      };
-
-      this.kafkaClient.emit('transaction-created', {
-        key: transactionId,
-        value: JSON.stringify(eventPayload),
-      });
-
-      this.logger.log(
-        `Transaction-created event emitted: ${JSON.stringify({
-          ...eventPayload,
-          timestamp: new Date(eventPayload.timestamp).toISOString(), // Convert back to ISO string for logging
-        })}`
       );
 
       return { transactionId };
