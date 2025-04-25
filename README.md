@@ -80,3 +80,68 @@ You can use Graphql;
 When you finish your challenge, after forking a repository, you **must** open a pull request to our repository. There are no limitations to the implementation, you can follow the programming paradigm, modularization, and style that you feel is the most appropriate solution.
 
 If you have any questions, please let us know.
+
+# How to run
+
+1. Start docker services
+```bash
+npm run start:docker
+```
+2. Install required global dependencies
+```bash
+npm i -g concurrently
+```
+3. Install dependencies
+```bash
+npm install
+```
+4. Run services
+```bash
+npm run start:all
+```
+# Use GraphQL Gateway for interacting with microservices
+1. Open http://localhost:4000/graphql
+
+2. To create a transaction
+## Operation
+```graphql
+mutation CreateTransaction($input: CreateTransactionInput!) {
+  createTransaction(input: $input) {
+    transactionExternalId
+  }
+}
+```
+## Variables
+```json
+{
+  "input": {
+    "accountExternalIdDebit": "123456",
+    "accountExternalIdCredit": "123456",
+    "tranferTypeId": 1,
+    "value": 1000000
+  }
+}
+```
+3. To get a transaction
+## Operation
+```graphql
+query GetTransaction($transactionExternalId: String!) {
+  getTransaction(transactionExternalId: $transactionExternalId) {
+    transactionExternalId
+    transactionType {
+      name
+    }
+    transactionStatus {
+      name
+    }
+    value
+    createdAt
+  }
+}
+```
+## Variables
+```json
+{
+  "transactionExternalId": "123456"
+}
+```

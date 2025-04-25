@@ -43,9 +43,14 @@
     "tslib": "^2.3.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.19.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "@apollo/server": "^4.9.0",
+    "cors": "^2.8.5",
+    "graphql": "^16.7.1",
+    "graphql-tag": "^2.12.6",
     "@grpc/grpc-js": "^1.13.3",
     "@grpc/proto-loader": "^0.7.15",
     "@grpc/reflection": "^1.0.4",

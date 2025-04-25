@@ -8,7 +8,7 @@ dotenv.config();
 const COMMAND_SERVICE_HOST =
   process.env.TRANSACTION_COMMAND_SERVICE_HOST || 'localhost';
 const COMMAND_SERVICE_PORT =
-  process.env.TRANSACTION_COMMAND_SERVICE_PORT || '50051';
+  process.env.TRANSACTION_COMMAND_SERVICE_PORT || '5000';
 const COMMAND_SERVICE_URL = `${COMMAND_SERVICE_HOST}:${COMMAND_SERVICE_PORT}`;
 
 const PROTO_PATH = path.resolve(__dirname, '../protos/transaction.proto');

@@ -8,9 +8,23 @@ services:
     command: start-single-node --insecure
     volumes:
       - cockroach_data:/cockroach/cockroach-data
+      - ./init-db:/docker-entrypoint-initdb.d
     environment:
       - COCKROACH_DATABASE=transaction
 
+  initdb:
+    image: cockroachdb/cockroach:latest
+    depends_on:
+      - cockroachdb
+    volumes:
+      - ./init.sql:/init.sql
+    command:
+      - "sql"
+      - "--insecure"
+      - "--host=cockroachdb"
+      - "-f"
+      - "/init.sql"
+      
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
     environment:
