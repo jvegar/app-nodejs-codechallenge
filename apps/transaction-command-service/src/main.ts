@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { TransactionModule } from './transaction.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
@@ -20,6 +20,7 @@ async function bootstrap() {
       },
     }
   );
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen();
   Logger.log(`Transaction Command microservice is listening`);

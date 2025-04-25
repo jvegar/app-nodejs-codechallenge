@@ -1,9 +1,18 @@
-import { Controller, Logger, Inject } from '@nestjs/common';
+import {
+  Controller,
+  Logger,
+  Inject,
+  UsePipes,
+  ValidationPipe,
+  UseFilters,
+} from '@nestjs/common';
 import { GrpcMethod, RpcException } from '@nestjs/microservices';
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateTransactionCommand } from '../../application/commands/create-transaction.command';
-import { CreateRequest, CreateResponse } from './proto/transaction';
+import { CreateResponse } from './proto/transaction';
 import { ClientKafka } from '@nestjs/microservices';
+import { CreateTransactionDto } from '../../application/dtos/create-transaction.dto';
+import { Http2gRPCExceptionFilter } from '../../infrastructure/filters/htt2gRPCException.filter';
 
 @Controller()
 export class TransactionController {
@@ -15,7 +24,9 @@ export class TransactionController {
   ) {}
 
   @GrpcMethod('TransactionService', 'CreateTransaction')
-  async createTransaction(data: CreateRequest): Promise<CreateResponse> {
+  @UsePipes(new ValidationPipe({ transform: true }))
+  @UseFilters(new Http2gRPCExceptionFilter())
+  async createTransaction(data: CreateTransactionDto): Promise<CreateResponse> {
     try {
       const {
         accountExternalIdDebit,
@@ -58,10 +69,7 @@ export class TransactionController {
 
       return { transactionId };
     } catch (error) {
-      // Log the error details
       this.logger.error('Error creating transaction', error.stack);
-
-      // Include the error message in the RpcException
       throw new RpcException(
         `An error occurred while creating the transaction: ${error.message}`
       );

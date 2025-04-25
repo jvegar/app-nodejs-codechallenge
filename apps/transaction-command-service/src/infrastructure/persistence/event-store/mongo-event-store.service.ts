@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { EventStorePort } from '../../domain/ports/event-store.port';
+import { EventStorePort } from '../../../domain/ports/event-store.port';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Event } from '../../domain/schemas/event.schema';
-import { EventDto } from '../../application/dtos/event.dto';
+import { Event } from '../../../domain/schemas/event.schema';
+import { EventDto } from '../../../application/dtos/event.dto';
 
 @Injectable()
 export class MongoEventStoreService implements EventStorePort {

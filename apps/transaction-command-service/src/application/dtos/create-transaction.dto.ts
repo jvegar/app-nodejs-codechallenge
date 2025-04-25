@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
 
 export class CreateTransactionDto {
   @IsString()
@@ -12,6 +12,7 @@ export class CreateTransactionDto {
   transferTypeId: number;
   @IsNumber()
   @IsNotEmpty()
+  @IsPositive()
   value: number;
 
   constructor(
