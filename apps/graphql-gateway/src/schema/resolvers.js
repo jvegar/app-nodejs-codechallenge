@@ -1,7 +1,8 @@
 const axios = require('axios');
 const transactionGrpcClient = require('../clients/transaction-grpc-client');
 
-const QUERY_SERVICE_URL = process.env.TRANSACTION_QUERY_SERVICE_URL || 'http://localhost:3001';
+const QUERY_SERVICE_URL =
+  process.env.TRANSACTION_QUERY_SERVICE_URL || 'http://localhost:3001';
 
 const resolvers = {
   Query: {
@@ -15,7 +16,7 @@ const resolvers = {
           ...transaction,
           transactionType: {
             id: transaction.transactionTypeId,
-            name: transaction.transactionTypename,
+            name: transaction.transactionTypeName,
           },
           transactionStatus: {
             id: transaction.transactionStatusId,
