@@ -1,6 +1,6 @@
 # Yape Code Challenge :rocket:
 
-Our code challenge will let you marvel us with your Jedi coding skills :smile:. 
+Our code challenge will let you marvel us with your Jedi coding skills :smile:.
 
 Don't forget that the proper way to submit your work is to fork the repo and create a PR :wink: ... have fun !!
 
@@ -84,26 +84,31 @@ If you have any questions, please let us know.
 # How to run
 
 1. Start docker services
+
 ```bash
 npm run start:docker
 ```
-2. Install required global dependencies
-```bash
-npm i -g concurrently
-```
-3. Install dependencies
+
+2. Install dependencies
+
 ```bash
 npm install
 ```
-4. Run services
+
+3. Run services
+
 ```bash
 npm run start:all
 ```
+
 # Use GraphQL Gateway for interacting with microservices
+
 1. Open http://localhost:4000/graphql
 
 2. To create a transaction
+
 ### Operation
+
 ```graphql
 mutation CreateTransaction($input: CreateTransactionInput!) {
   createTransaction(input: $input) {
@@ -111,7 +116,9 @@ mutation CreateTransaction($input: CreateTransactionInput!) {
   }
 }
 ```
+
 ### Variables
+
 ```json
 {
   "input": {
@@ -122,8 +129,11 @@ mutation CreateTransaction($input: CreateTransactionInput!) {
   }
 }
 ```
+
 3. To get a transaction
+
 ### Operation
+
 ```graphql
 query GetTransaction($transactionExternalId: String!) {
   getTransaction(transactionExternalId: $transactionExternalId) {
@@ -139,15 +149,20 @@ query GetTransaction($transactionExternalId: String!) {
   }
 }
 ```
+
 ### Variables
+
 ```json
 {
   "transactionExternalId": "123456"
 }
 ```
+
 4. To get all transactions
+
 ### Operation
-```graphql    
+
+```graphql
 query GetTransactions {
   getTransactions {
     transactionExternalId
@@ -161,4 +176,4 @@ query GetTransactions {
     createdAt
   }
 }
-``` 
+```
