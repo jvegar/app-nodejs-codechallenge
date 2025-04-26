@@ -13,7 +13,6 @@ export class MongoEventStoreService implements EventStorePort {
   ) {}
 
   async saveEvent(event: EventDto): Promise<void> {
-    // console.log('Event to be saved:', event);
     try {
       await this.eventModel.create(event);
     } catch (error) {

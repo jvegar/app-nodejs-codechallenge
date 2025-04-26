@@ -3,7 +3,7 @@ import { CreateTransactionCommand } from '../create-transaction.command';
 import { TransactionCreatedEvent } from '../../../domain/events/transaction-created.event';
 import { v4 as uuidv4 } from 'uuid';
 import { EventTypeEnum } from '../../enums/event-type.enum';
-import { EventStoreDBEventStoreService } from 'apps/transaction-command-service/src/infrastructure/persistence/event-store/eventstoredb-event-store.service';
+import { EventStoreDBEventStoreService } from '../../../infrastructure/persistence/event-store/eventstoredb-event-store.service';
 
 @CommandHandler(CreateTransactionCommand)
 export class CreateTransactionHandler
